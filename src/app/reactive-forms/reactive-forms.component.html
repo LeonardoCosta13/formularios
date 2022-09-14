@@ -1,0 +1,55 @@
+<form [formGroup]="cadastroform" (ngSubmit)="submitForm()">
+
+    <label>
+        Nome:
+    <input type="text" formControlName="firstName" minlength="5">
+
+    <span 
+        class="alert"
+        *ngIf="cadastroform.get('firstName')?.errors && 
+        (cadastroform.get('firstName')?.touched || cadastroform.get('firstName')?.dirty)">
+            Favor digite seu nome
+    </span>
+    </label>
+    <br>
+    <br>
+
+    <label>
+        Sobrenome:
+    <input type="text" formControlName="lastName">
+
+        <span  class="alert"
+                *ngIf="cadastroform.get('lastName')?.errors && 
+                (cadastroform.get('lastName')?.touched || cadastroform.get('lastName')?.dirty)">
+                    Favor deve ter no minimo
+                    {{ cadastroform.get('lastName')?.errors?.['minlength']?.requiredLength }}
+                    e você jé digitou
+                    {{ cadastroform.get('lastName')?.errors?.['minlength']?.actualLength }}
+
+        
+        </span>
+    </label>
+
+    <br>
+    <br>
+
+    <label>
+        email:
+        <input type="email" formControlName="email">
+    </label>
+
+    <p>
+        <!-- {{ cadastroform.get('firstName')?.errors | json }}
+        {{ cadastroform.get('firstName')?.touched | json }}
+        {{ cadastroform.get('firstName')?.dirty | json }} -->
+
+        <!-- {{ cadastroform.get('lastName')?.errors | json }} -->
+        <!-- {{ cadastroform.get('firstName')?.errors }} -->
+
+        {{ cadastroform.get('email')?.errors | json }}
+
+
+    </p>
+
+    <button [disabled]="cadastroform.invalid">Enviar</button>
+</form>
